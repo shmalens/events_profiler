@@ -16,12 +16,10 @@ namespace profiler {
      * */
     void Date::validateStream(std::istream &is, char symbol) {
         if (is.fail()) {
-            std::cerr << "FAIL" << std::endl;
             throw profiler::exceptions::DateInvalidFormat();
         }
 
         if (is.peek() != symbol) {
-            std::cerr << "DELIMITER: " << is.peek() << std::endl;
             throw profiler::exceptions::DateInvalidDelimiter();
         } else {
             is.get();
