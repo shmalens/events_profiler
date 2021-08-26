@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../project/include/Date.h
+
+/home/alexander/Desktop/events_profiler/project/main.cpp
+iostream
+-
+string
+-
+Date.h
+/home/alexander/Desktop/events_profiler/project/Date.h
+

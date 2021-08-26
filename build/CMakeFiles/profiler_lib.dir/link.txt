@@ -1,0 +1,2 @@
+/usr/bin/ar qc libprofiler_lib.a  CMakeFiles/profiler_lib.dir/project/src/Date.cpp.o
+/usr/bin/ranlib libprofiler_lib.a

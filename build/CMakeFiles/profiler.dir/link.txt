@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/profiler.dir/project/main.cpp.o  -o profiler  libprofiler_lib.a 

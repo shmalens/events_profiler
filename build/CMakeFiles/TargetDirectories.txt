@@ -1,0 +1,4 @@
+/home/alexander/Desktop/events_profiler/build/CMakeFiles/rebuild_cache.dir
+/home/alexander/Desktop/events_profiler/build/CMakeFiles/edit_cache.dir
+/home/alexander/Desktop/events_profiler/build/CMakeFiles/profiler_lib.dir
+/home/alexander/Desktop/events_profiler/build/CMakeFiles/profiler.dir
