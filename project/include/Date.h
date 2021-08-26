@@ -28,7 +28,7 @@ namespace profiler {
 
         DateNumeric parseDate(const std::string &dateInString, char delimiter);
 
-        void validateStream(std::istream &is, char symbol);
+        static void validateStream(std::istream &is, char symbol);
     };
 
     std::ostream &operator<<(std::ostream &os, const Date &outputDate);
