@@ -1,19 +1,15 @@
 #include <iostream>
 #include <sstream>
-#include <vector>
 
 #include "Manager.h"
+#include "DataBase.h"
+#include "Date.h"
 
 int main() {
-    StreamInputManager si(std::cin);
+    StreamInputManager manager(std::cin);
+    profiler::DataBase db;
+    Dispatcher dispatcher(db, manager);
 
-    while (si.IsGood()) {
-        Command cmd = si.GetCommand();
-
-        std::cout << cmd.type << std::endl;
-        std::cout << cmd.arg1 << std::endl;
-        std::cout << cmd.arg2 << std::endl;
-    }
-
+    dispatcher.Dispatch();
     return 0;
 }

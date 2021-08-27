@@ -4,12 +4,12 @@
 #include <string>
 #include <vector>
 
+#include "DataBase.h"
+
 #define ADD_CMD "Add"
 #define DELETE_CMD "Delete"
 #define FIND_CMD "Find"
 #define PRINT_CMD "Print"
-
-#define CMD "Print asd"
 
 enum CommandTypes {
     UNEXPECTED,
@@ -43,6 +43,8 @@ public:
 
     virtual Command GetCommand() = 0;
 
+    virtual bool IsGood() const { return true; };
+
 protected:
     Parser m_parser;
 };
@@ -55,10 +57,22 @@ public:
 
     Command GetCommand() override;
 
-    bool IsGood() const;
+    bool IsGood() const override;
 
 private:
     std::istream &is;
+};
+
+class Dispatcher {
+public:
+    Dispatcher() = delete;
+    Dispatcher(profiler::DataBase &_db, InputManager &_manager) : db(_db), manager(_manager) {}
+
+    void Dispatch();
+
+private:
+    profiler::DataBase &db;
+    InputManager &manager;
 };
 
 #endif //PROFILER_MANAGER_H

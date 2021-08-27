@@ -45,7 +45,17 @@ namespace profiler {
         stringRepresentation = dateInString;
     }
 
+    bool Date::operator==(const Date &rhs) const {
+        return (this->dateNumericRepresentation.day == rhs.dateNumericRepresentation.day &&
+                this->dateNumericRepresentation.month == rhs.dateNumericRepresentation.month &&
+                this->dateNumericRepresentation.year == rhs.dateNumericRepresentation.year);
+    }
+
     bool Date::operator<(const Date &rhs) const {
+        if (*this == rhs) {
+            return false;
+        }
+
         if (this->dateNumericRepresentation.year > rhs.dateNumericRepresentation.year) {
             return false;
         }
@@ -55,12 +65,6 @@ namespace profiler {
         }
 
         if (this->dateNumericRepresentation.day > rhs.dateNumericRepresentation.day) {
-            return false;
-        }
-
-        if (this->dateNumericRepresentation.day == rhs.dateNumericRepresentation.day &&
-            this->dateNumericRepresentation.month == rhs.dateNumericRepresentation.month &&
-            this->dateNumericRepresentation.year == rhs.dateNumericRepresentation.year) {
             return false;
         }
 

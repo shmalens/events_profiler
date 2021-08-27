@@ -12,6 +12,8 @@ namespace profiler {
 
         friend std::ostream &operator<<(std::ostream &os, const Date &outputDate);
 
+        bool operator==(const Date &rhs) const;
+
         struct DateNumeric {
             int year;
             int month;

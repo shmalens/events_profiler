@@ -93,3 +93,48 @@ Command StreamInputManager::GetCommand() {
 bool StreamInputManager::IsGood() const {
     return is.good();
 }
+
+void Dispatcher::Dispatch() {
+    while (manager.IsGood()) {
+        Command tmp_cmd = manager.GetCommand();
+
+        switch (tmp_cmd.type) {
+            case CommandTypes::ADD: {
+//                profiler::Date date(tmp_cmd.arg1);
+//                std::cout << "str: " << tmp_cmd.arg1 << std::endl;
+//                std::cout << "class: " << date << std::endl;
+                db.Add(tmp_cmd.arg1, tmp_cmd.arg2);
+            }
+                break;
+
+            case CommandTypes::DELETE_DATE: {
+                std::cout << "DELETE_DATE" << std::endl;
+            }
+                break;
+
+            case CommandTypes::DELETE_EVENT: {
+                std::cout << "DELETE_EVENT" << std::endl;
+            }
+                break;
+
+            case CommandTypes::FIND: {
+                std::cout << "FIND" << std::endl;
+            }
+                break;
+
+            case CommandTypes::PRINT: {
+                std::cout << db.ShowDB();
+            }
+                break;
+
+            case CommandTypes::UNEXPECTED: {
+                std::cout << "UNEXPECTED" << std::endl;
+            }
+                break;
+
+            case CommandTypes::EMPTY:
+            default:
+                continue;
+        }
+    }
+}
