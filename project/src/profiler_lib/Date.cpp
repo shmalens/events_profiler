@@ -52,23 +52,27 @@ namespace profiler {
     }
 
     bool Date::operator<(const Date &rhs) const {
-        if (*this == rhs) {
-            return false;
-        }
+//        if (*this == rhs) {
+//            return false;
+//        }
+//
+//        if (this->dateNumericRepresentation.year > rhs.dateNumericRepresentation.year) {
+//            return false;
+//        }
+//
+//        if (this->dateNumericRepresentation.month > rhs.dateNumericRepresentation.month) {
+//            return false;
+//        }
+//
+//        if (this->dateNumericRepresentation.day > rhs.dateNumericRepresentation.day) {
+//            return false;
+//        }
+//
+//        return true;
+         const DateNumeric tdm = this->dateNumericRepresentation;
+         const DateNumeric rdm = rhs.dateNumericRepresentation;
 
-        if (this->dateNumericRepresentation.year > rhs.dateNumericRepresentation.year) {
-            return false;
-        }
-
-        if (this->dateNumericRepresentation.month > rhs.dateNumericRepresentation.month) {
-            return false;
-        }
-
-        if (this->dateNumericRepresentation.day > rhs.dateNumericRepresentation.day) {
-            return false;
-        }
-
-        return true;
+        return std::tie(tdm.year, tdm.month, tdm.day) < std::tie(rdm.year, rdm.month, rdm.day);
     }
 
     std::ostream &operator<<(std::ostream &os, const Date &outputDate) {
