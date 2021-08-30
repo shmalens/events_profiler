@@ -142,8 +142,14 @@ void Dispatcher::Dispatch() {
                     continue;
             }
         }
+        catch (profiler::exceptions::DateInvalidMonth &ex) {
+            std::cout << "Month value is invalid: " << ex.GetValue() << std::endl;
+        }
+        catch (profiler::exceptions::DateInvalidDay &ex) {
+            std::cout << "Day value is invalid: " << ex.GetValue() << std::endl;
+        }
         catch (profiler::exceptions::IncorrectDateEntry &ex) {
-            std::cout << "profiler::exceptions::IncorrectDateEntry" << std::endl;
+            std::cout << "Wrong date format: " << tmp_cmd.arg1 << std::endl;
         }
     }
 }

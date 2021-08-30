@@ -33,8 +33,14 @@ namespace profiler {
         parsingStream >> resultDate.year;
         validateStream(parsingStream, delimiter);
         parsingStream >> resultDate.month;
+        if (resultDate.month < 1 || resultDate.month > 12) {
+            throw profiler::exceptions::DateInvalidMonth(resultDate.month);
+        }
         validateStream(parsingStream, delimiter);
         parsingStream >> resultDate.day;
+        if (resultDate.day < 1 || resultDate.day > 31) {
+            throw profiler::exceptions::DateInvalidDay(resultDate.day);
+        }
         validateStream(parsingStream, EOF);
 
         return resultDate;
@@ -60,7 +66,7 @@ namespace profiler {
 //            return false;
 //        }
 //
-//        if (this->dateNumericRepresentation.month > rhs.dateNumericRepresentation.month) {
+//        if (this->dateNumericRepresentation.day > rhs.dateNumericRepresentation.day) {
 //            return false;
 //        }
 //

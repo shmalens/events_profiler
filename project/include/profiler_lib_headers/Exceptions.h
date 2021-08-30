@@ -25,6 +25,30 @@ namespace profiler {
             const char *what() const noexcept override { return "Invalid date delimiter"; }
         };
 
+        class DateInvalidMonth : public DateException {
+        public:
+            explicit DateInvalidMonth(int _month) : month(_month) {}
+
+            const char *what() const noexcept override { return "Invalid date month entry"; }
+
+            int GetValue() const { return month; }
+
+        private:
+            int month;
+        };
+
+        class DateInvalidDay : public DateException {
+        public:
+            explicit DateInvalidDay(int day) : day(day) {}
+
+            const char *what() const noexcept override { return "Invalid date day entry"; }
+
+            int GetValue() const { return day; }
+
+        private:
+            int day;
+        };
+
         class DataBaseError : std::exception {
         public:
             const char *what() const noexcept override { return "Data Base exception"; }
@@ -32,7 +56,7 @@ namespace profiler {
 
         class IncorrectDateEntry : public DataBaseError {
         public:
-            explicit IncorrectDateEntry(const std::string &operation=DEFAULT_OPERATION_MSG);
+            explicit IncorrectDateEntry(const std::string &operation = DEFAULT_OPERATION_MSG);
 
             const char *what() const noexcept override { return format_message.get(); }
 
