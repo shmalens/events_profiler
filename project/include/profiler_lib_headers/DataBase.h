@@ -22,7 +22,8 @@ namespace profiler {
 
         std::string ShowDB() const;
 
-
+        Events Find(const std::string &date);
+        Events Find(const Date &date);
 
     private:
         std::map<Date, Events> db;

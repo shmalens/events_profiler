@@ -1,6 +1,7 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <iomanip>
 
 #include "Date.h"
 #include "Exceptions.h"
@@ -82,8 +83,8 @@ namespace profiler {
     }
 
     std::ostream &operator<<(std::ostream &os, const Date &outputDate) {
-        os << outputDate.dateNumericRepresentation.year << '-'
-           << outputDate.dateNumericRepresentation.month << '-'
+        os << std::setw(4) << std::setfill('0') << outputDate.dateNumericRepresentation.year << '-'
+           << std::setw(2) << std::setfill('0') << outputDate.dateNumericRepresentation.month << '-'
            << outputDate.dateNumericRepresentation.day;
         return os;
     }

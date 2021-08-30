@@ -90,8 +90,19 @@ namespace profiler {
     std::string DataBase::ShowDB() const {
         std::stringstream ss;
         for (const auto &[date, events]: db) {
-            ss << date << ": " << events << std::endl;
+            for (const auto &i: events.ConstStorageRef()) {
+                std::cout << date << ' ' << i << std::endl;
+            }
         }
         return ss.str();
+    }
+
+    Events DataBase::Find(const Date &date) {
+        return db[date];
+    }
+
+    Events DataBase::Find(const std::string &date) {
+        Date tmp_date(date);
+        return Find(tmp_date);
     }
 }

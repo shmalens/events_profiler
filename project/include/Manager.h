@@ -7,7 +7,7 @@
 #include "DataBase.h"
 
 #define ADD_CMD "Add"
-#define DELETE_CMD "Delete"
+#define DELETE_CMD "Del"
 #define FIND_CMD "Find"
 #define PRINT_CMD "Print"
 

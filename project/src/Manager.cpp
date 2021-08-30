@@ -108,17 +108,20 @@ void Dispatcher::Dispatch() {
         try {
             switch (tmp_cmd.type) {
                 case CommandTypes::ADD: {
-                    db.Add(tmp_cmd.arg1, tmp_cmd.arg2);
+                    profiler::Date tmp(tmp_cmd.arg1);
+                    db.Add(tmp, tmp_cmd.arg2);
                 }
                     break;
 
                 case CommandTypes::DELETE_DATE: {
-                    std::cout << "Deleted " << db.DeleteDate(tmp_cmd.arg1) << " events" << std::endl;
+                    profiler::Date tmp(tmp_cmd.arg1);
+                    std::cout << "Deleted " << db.DeleteDate(tmp) << " events" << std::endl;
                 }
                     break;
 
                 case CommandTypes::DELETE_EVENT: {
-                    if (db.DeleteEvent(tmp_cmd.arg1, tmp_cmd.arg2)) {
+                    profiler::Date tmp(tmp_cmd.arg1);
+                    if (db.DeleteEvent(tmp, tmp_cmd.arg2)) {
                         std::cout << "Deleted successfully" << std::endl;
                     } else {
                         std::cout << "Event not found" << std::endl;
@@ -127,7 +130,8 @@ void Dispatcher::Dispatch() {
                     break;
 
                 case CommandTypes::FIND: {
-
+                    profiler::Date tmp(tmp_cmd.arg1);
+                    std::cout << db.Find(tmp) << std::endl;
                 }
                     break;
 
@@ -148,12 +152,19 @@ void Dispatcher::Dispatch() {
         }
         catch (profiler::exceptions::DateInvalidMonth &ex) {
             std::cout << "Month value is invalid: " << ex.GetValue() << std::endl;
+            return;
         }
         catch (profiler::exceptions::DateInvalidDay &ex) {
             std::cout << "Day value is invalid: " << ex.GetValue() << std::endl;
+            return;
         }
         catch (profiler::exceptions::IncorrectDateEntry &ex) {
             std::cout << "Wrong date format: " << tmp_cmd.arg1 << std::endl;
+            return;
+        }
+        catch (profiler::exceptions::DateInvalidDelimiter &ex) {
+            std::cout << "Wrong date format: " << tmp_cmd.arg1 << std::endl;
+            return;
         }
     }
 }
