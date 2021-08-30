@@ -16,4 +16,12 @@ namespace profiler {
         }
         return os;
     }
+
+    std::vector<std::string>::iterator Events::Find(const std::string &str) {
+        return std::find(events.begin(), events.end(), str);
+    }
+
+    bool Events::isEventExists(const std::string &str) {
+        return Find(str) != events.end();
+    }
 }

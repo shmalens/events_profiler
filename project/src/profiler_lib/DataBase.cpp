@@ -2,6 +2,7 @@
 #include <string>
 #include <exception>
 #include <sstream>
+#include <algorithm>
 
 #include "DataBase.h"
 #include "Date.h"
@@ -10,13 +11,16 @@
 
 namespace profiler {
     void DataBase::addImpl(const Date &date, const std::string &newNoteEvent) {
-        if (db.count(date) == 1) {
+        if (!db[date].isEventExists(newNoteEvent)) {
             db[date].Add(newNoteEvent);
-        } else {
-            Events ev;
-            ev.Add(newNoteEvent);
-            db.insert(std::pair<Date, Events>(date, ev));
         }
+//        if (db.count(date) == 1) {
+//            db[date].Add(newNoteEvent);
+//        } else {
+//            Events ev;
+//            ev.Add(newNoteEvent);
+//            db.insert(std::pair<Date, Events>(date, ev));
+//        }
     }
 
     void DataBase::Add(const Date &newNoteDate, const std::string &newNoteEvent) {

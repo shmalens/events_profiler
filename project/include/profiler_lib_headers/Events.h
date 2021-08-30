@@ -22,6 +22,10 @@ namespace profiler {
 
         friend std::ostream &operator<<(std::ostream &os, const Events &ev);
 
+        std::vector<std::string>::iterator Find(const std::string &str);
+
+        bool isEventExists(const std::string &str);
+
     private:
         std::vector<std::string> events;
     };
