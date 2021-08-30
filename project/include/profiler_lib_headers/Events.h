@@ -14,7 +14,7 @@ namespace profiler {
 
         void Add(const std::string &newEvent) { events.push_back(newEvent); }
 
-        void Delete(const std::string &removeEvent);
+        bool Delete(const std::string &removeEvent);
 
         const std::vector<std::string> &ConstStorageRef() const { return events; }
 
@@ -25,6 +25,8 @@ namespace profiler {
         std::vector<std::string>::iterator Find(const std::string &str);
 
         bool isEventExists(const std::string &str);
+
+        size_t Size() const { return events.size(); }
 
     private:
         std::vector<std::string> events;

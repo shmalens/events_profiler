@@ -39,18 +39,20 @@ namespace profiler {
         }
     }
 
-    void DataBase::deleteDateImpl(const Date &removeDate) {
+    size_t DataBase::deleteDateImpl(const Date &removeDate) {
+        size_t date_events_amount = db[removeDate].Size();
         db.erase(removeDate);
+        return date_events_amount;
     }
 
-    void DataBase::DeleteDate(const Date &removeDate) {
-        deleteDateImpl(removeDate);
+    size_t DataBase::DeleteDate(const Date &removeDate) {
+        return deleteDateImpl(removeDate);
     }
 
-    void DataBase::DeleteDate(const std::string &removeDate) {
+    size_t DataBase::DeleteDate(const std::string &removeDate) {
         try {
             const Date date(removeDate);
-            deleteDateImpl(date);
+            return deleteDateImpl(date);
         }
         catch (profiler::exceptions::DateInvalidDelimiter &ex) {
             throw profiler::exceptions::IncorrectDateEntry("DeleteDate");
@@ -60,18 +62,22 @@ namespace profiler {
         }
     }
 
-    void DataBase::deleteEventImpl(const Date &removeDate, const std::string &removeEvent) {
-        db[removeDate].Delete(removeEvent);
+    bool DataBase::deleteEventImpl(const Date &removeDate, const std::string &removeEvent) {
+        bool res_val = db[removeDate].Delete(removeEvent);
+        if (db[removeDate].Size() == 0) {
+            deleteDateImpl(removeDate);
+        }
+        return res_val;
     }
 
-    void DataBase::DeleteEvent(const Date &removeDate, const std::string &removeEvent) {
-        deleteEventImpl(removeDate, removeEvent);
+    bool DataBase::DeleteEvent(const Date &removeDate, const std::string &removeEvent) {
+        return deleteEventImpl(removeDate, removeEvent);
     }
 
-    void DataBase::DeleteEvent(const std::string &removeDate, const std::string &removeEvent) {
+    bool DataBase::DeleteEvent(const std::string &removeDate, const std::string &removeEvent) {
         try {
             const Date date(removeDate);
-            deleteEventImpl(date, removeEvent);
+            return deleteEventImpl(date, removeEvent);
         }
         catch (profiler::exceptions::DateInvalidDelimiter &ex) {
             throw profiler::exceptions::IncorrectDateEntry("DeleteEvent");

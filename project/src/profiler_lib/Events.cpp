@@ -6,8 +6,12 @@
 #include "Events.h"
 
 namespace profiler {
-    void Events::Delete(const std::string &removeEvent) {
-        events.erase(std::remove(events.begin(), events.end(), removeEvent), events.end());
+    bool Events::Delete(const std::string &removeEvent) {
+        if (isEventExists(removeEvent)) {
+            events.erase(std::remove(events.begin(), events.end(), removeEvent), events.end());
+            return true;
+        }
+        return false;
     }
 
     std::ostream &operator<<(std::ostream &os, const Events &ev) {

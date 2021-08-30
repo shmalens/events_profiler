@@ -14,20 +14,22 @@ namespace profiler {
         void Add(const std::string &newNoteDate, const std::string &newNoteEvent);
         void Add(const Date &newNoteDate, const std::string &newNoteEvent);
 
-        void DeleteDate(const std::string &removeDate);
-        void DeleteDate(const Date &removeDate);
+        size_t DeleteDate(const std::string &removeDate);
+        size_t DeleteDate(const Date &removeDate);
 
-        void DeleteEvent(const std::string &removeDate, const std::string &removeEvent);
-        void DeleteEvent(const Date &removeDate, const std::string &removeEvent);
+        bool DeleteEvent(const std::string &removeDate, const std::string &removeEvent);
+        bool DeleteEvent(const Date &removeDate, const std::string &removeEvent);
 
         std::string ShowDB() const;
+
+
 
     private:
         std::map<Date, Events> db;
 
         void addImpl(const Date &date, const std::string &newNoteEvent);
-        void deleteDateImpl(const Date &removeDate);
-        void deleteEventImpl(const Date &removeDate, const std::string &removeEvent);
+        size_t deleteDateImpl(const Date &removeDate);
+        bool deleteEventImpl(const Date &removeDate, const std::string &removeEvent);
     };
 }
 

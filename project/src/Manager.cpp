@@ -113,17 +113,21 @@ void Dispatcher::Dispatch() {
                     break;
 
                 case CommandTypes::DELETE_DATE: {
-                    std::cout << "DELETE_DATE" << std::endl;
+                    std::cout << "Deleted " << db.DeleteDate(tmp_cmd.arg1) << " events" << std::endl;
                 }
                     break;
 
                 case CommandTypes::DELETE_EVENT: {
-                    std::cout << "DELETE_EVENT" << std::endl;
+                    if (db.DeleteEvent(tmp_cmd.arg1, tmp_cmd.arg2)) {
+                        std::cout << "Deleted successfully" << std::endl;
+                    } else {
+                        std::cout << "Event not found" << std::endl;
+                    }
                 }
                     break;
 
                 case CommandTypes::FIND: {
-                    std::cout << "FIND" << std::endl;
+
                 }
                     break;
 
