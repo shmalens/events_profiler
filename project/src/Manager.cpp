@@ -32,6 +32,7 @@ Command Parser::operator()(const std::string &cmd) {
     if (args[0] == ADD_CMD) {
         if (args.size() != 3) {
             resultCmd.type = CommandTypes::UNEXPECTED;
+            resultCmd.arg1 = args[0];
             return resultCmd;
         }
 
@@ -44,6 +45,7 @@ Command Parser::operator()(const std::string &cmd) {
     if (args[0] == DELETE_CMD) {
         if (args.size() < 2) {
             resultCmd.type = CommandTypes::UNEXPECTED;
+            resultCmd.arg1 = args[0];
             return resultCmd;
         }
 
@@ -64,6 +66,7 @@ Command Parser::operator()(const std::string &cmd) {
     if (args[0] == FIND_CMD) {
         if (args.size() != 2) {
             resultCmd.type = CommandTypes::UNEXPECTED;
+            resultCmd.arg1 = args[0];
             return resultCmd;
         }
 
@@ -75,6 +78,7 @@ Command Parser::operator()(const std::string &cmd) {
     if (args[0] == PRINT_CMD) {
         if (args.size() != 1) {
             resultCmd.type = CommandTypes::UNEXPECTED;
+            resultCmd.arg1 = args[0];
             return resultCmd;
         }
 
@@ -83,6 +87,7 @@ Command Parser::operator()(const std::string &cmd) {
     }
 
     resultCmd.type = CommandTypes::UNEXPECTED;
+    resultCmd.arg1 = args[0];
     return resultCmd;
 }
 
@@ -128,7 +133,7 @@ void Dispatcher::Dispatch() {
                     break;
 
                 case CommandTypes::UNEXPECTED: {
-                    std::cout << "UNEXPECTED" << std::endl;
+                    std::cout << "Unknown command: " << tmp_cmd.arg1 << std::endl;
                 }
                     break;
 
@@ -138,7 +143,7 @@ void Dispatcher::Dispatch() {
             }
         }
         catch (profiler::exceptions::IncorrectDateEntry &ex) {
-            std::cout << ex.what() << std::endl;
+            std::cout << "profiler::exceptions::IncorrectDateEntry" << std::endl;
         }
     }
 }
